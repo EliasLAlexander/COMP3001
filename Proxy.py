@@ -60,7 +60,7 @@ while True:
   # Accept connection from client and store in the clientSocket
   try:
     # ~~~~ INSERT CODE ~~~~
-    connectionSocket, addr = serverSocket.accept() # accept connections from outside
+    clientSocket, addr = serverSocket.accept() # accept connections from outside
     # ~~~~ END CODE INSERT ~~~~
     print ('Received a connection')
   except:
@@ -70,7 +70,7 @@ while True:
   # Get HTTP request from client
   # and store it in the variable: message_bytes
   # ~~~~ INSERT CODE ~~~~
-  message_bytes = connectionSocket.recv(1024) # read bytes from socket connection
+  message_bytes = clientSocket.recv(1024) # receive message from client
   # ~~~~ END CODE INSERT ~~~~
   message = message_bytes.decode('utf-8')
   print ('Received request:')
@@ -153,7 +153,7 @@ while True:
 
       # use connection socket to send the cache data to the client
       else:
-        [connectionSocket.send(data) for data in cacheData]
+        [clientSocket.send(data) for data in cacheData] #
         exit()
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
@@ -207,12 +207,12 @@ while True:
 
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
-      response = originServerSocket.recv(BUFFER_SIZE)
+      response = originServerSocket.recv(1024)
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
       # ~~~~ INSERT CODE ~~~~
-      connectionSocket.send(response)
+      clientSocket.send(response)
       # ~~~~ END CODE INSERT ~~~~
 
       # Create a new file in the cache for the requested file.
@@ -224,8 +224,8 @@ while True:
 
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
-      for data in response:
-        cacheFile.write(data)
+      for item in response:
+        cacheFile.write(item)
       # ~~~~ END CODE INSERT ~~~~
       cacheFile.close()
       print ('cache file closed')
