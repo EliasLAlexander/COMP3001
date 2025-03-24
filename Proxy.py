@@ -35,7 +35,7 @@ except:
 try:
   # Bind the the server socket to a host and port
   # ~~~~ INSERT CODE ~~~~
-  serverSocket.bind(args.hostname, int(args.port)) # bind the socket to server address and port
+  serverSocket.bind((args.hostname, int(args.port))) # bind the socket to server address and port
   # ~~~~ END CODE INSERT ~~~~
   print ('Port is bound')
 except:
@@ -208,7 +208,6 @@ while True:
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
       response = originServerSocket.recv(BUFFER_SIZE)
-
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
