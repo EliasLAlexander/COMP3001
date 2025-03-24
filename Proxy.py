@@ -126,8 +126,8 @@ while True:
     # check if the cache is still valid by checking the status code
     cache_status = cacheData[0].split()[1] 
 
-    # if cache is moved permanently, send the client to original server
-    if cache_status == '301':
+    # if cache is moved permanently or redirected, send the client to original server
+    if cache_status == '301' or cache_status == '302':
       # extract the new location from the cache and set the new location
       hostname, resource = cacheLocation.split('=')[1].split('&')[0].split('/')[2], '/'
     
