@@ -46,7 +46,7 @@ except:
 try:
   # Listen on the server socket
   # ~~~~ INSERT CODE ~~~~
-  serverSocket.listen(5) # listen for incoming connections
+  serverSocket.listen(1) # listen for incoming connections
   # ~~~~ END CODE INSERT ~~~~
   print ('Listening to socket')
 except:
@@ -143,7 +143,7 @@ while True:
       # check if the cache is reusable
       if 'Cache-Control' in data:
         cache_control = data.split(':', 1)[1]
-        if cache_control == 'no-cache': #RFC 2616. 14.9.1
+        if cache_control == 'no-cache' #RFC 2616. 14.9.1
           print('Cache is not reusable')
           break
       
@@ -200,7 +200,7 @@ while True:
         print ('> ' + line)
 
       try:
-        originServerSocket.sendall(originServerRequest) 
+        originServerSocket.sendall(request.encode()) 
       except socket.error:
         print ('Forward request to origin failed')
         sys.exit()
@@ -210,7 +210,7 @@ while True:
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
       #receive the response from the origin server if not in cache
-      response = originServerSocket.recv(BUFFER_SIZE) 
+      response = originServerSocket.recv(1024) 
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
