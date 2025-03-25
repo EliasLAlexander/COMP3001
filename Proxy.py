@@ -19,8 +19,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('hostname', help='the IP Address Of Proxy Server')
 parser.add_argument('port', help='the port number of the proxy server')
 args = parser.parse_args()
-# proxyHost = args.hostname
-# proxyPort = int(args.port)
+proxyHost = args.hostname
+proxyPort = int(args.port)
 
 # Create a server socket, bind it to a port and start listening
 try:
