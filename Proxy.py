@@ -67,7 +67,9 @@ while True:
   except:
     print ('Failed to accept connection')
     sys.exit()
-
+  
+  # Receive message from client and get the data in the buffer size
+  message_bytes = 'METHOD URI VERSION'
   # Get HTTP request from client
   # and store it in the variable: message_bytes
   # ~~~~ INSERT CODE ~~~~
@@ -125,7 +127,7 @@ while True:
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
     # check if the cache is still valid by checking the status code
-    cache_status = cacheData[0].split()[1] 
+    cache_status = cacheData[0].split(' ')[1] 
 
     # if cache is moved permanently or redirected, send the client to original server
     if cache_status == '301' or cache_status == '302':
@@ -209,6 +211,7 @@ while True:
 
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
+      response = ''
       #receive the response from the origin server if not in cache
       response = originServerSocket.recv(1024) 
       # ~~~~ END CODE INSERT ~~~~
@@ -227,7 +230,8 @@ while True:
 
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
-      cacheFile.write(response) # write the entire response to the cache file
+      for data in response:
+        cacheFile.write(data) # write the entire response to the cache file
       # ~~~~ END CODE INSERT ~~~~
       cacheFile.close()
       print ('cache file closed')
