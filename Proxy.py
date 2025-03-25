@@ -36,7 +36,7 @@ except:
 try:
   # Bind the the server socket to a host and port
   # ~~~~ INSERT CODE ~~~~
-  serverSocket.bind((proxyHost, proxyPort)) # bind the socket to server address and port
+  serverSocket.bind(('', proxyPort)) # bind the socket to server address and port
   # ~~~~ END CODE INSERT ~~~~
   print ('Port is bound')
 except:
