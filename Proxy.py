@@ -156,8 +156,9 @@ while True:
 
       # use connection socket to send the cache data to the client
       else:
-        [clientSocket.send(data) for data in cacheData] #
-        exit()
+        for item in cacheData:
+          clientSocket.send(item)
+          #exit()
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
