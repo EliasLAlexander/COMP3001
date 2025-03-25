@@ -208,7 +208,8 @@ while True:
 
       # Get the response from the origin server
       # ~~~~ INSERT CODE ~~~~
-      response = originServerSocket.recv(1024)
+      #receive the response from the origin server if not in cache
+      response = originServerSocket.recv(BUFFER_SIZE) 
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
