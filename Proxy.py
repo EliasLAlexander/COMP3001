@@ -16,8 +16,8 @@ BUFFER_SIZE = 1000000
 
 # Get the IP address and Port number to use for this web proxy server
 parser = argparse.ArgumentParser()
-parser.add_argument('127.0.0.1', help='the IP Address Of Proxy Server')
-parser.add_argument('8080', help='the port number of the proxy server')
+parser.add_argument('hostname', help='the IP Address Of Proxy Server')
+parser.add_argument('port', help='the port number of the proxy server')
 args = parser.parse_args()
 proxyHost = args.hostname
 proxyPort = int(args.port)
