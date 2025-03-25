@@ -71,7 +71,7 @@ while True:
   # Get HTTP request from client
   # and store it in the variable: message_bytes
   # ~~~~ INSERT CODE ~~~~
-  message_bytes = clientSocket.recv(4096) # receive message from client
+  message_bytes = clientSocket.recv(1024) # receive message from client
   # ~~~~ END CODE INSERT ~~~~
   message = message_bytes.decode('utf-8')
   print ('Received request:')
@@ -200,7 +200,7 @@ while True:
         print ('> ' + line)
 
       try:
-        originServerSocket.sendall(request.encode())
+        originServerSocket.sendall(originServerRequest) 
       except socket.error:
         print ('Forward request to origin failed')
         sys.exit()
