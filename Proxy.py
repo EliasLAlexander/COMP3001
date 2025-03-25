@@ -225,8 +225,7 @@ def main():
 
         # Save origin server response in the cache file
         # ~~~~ INSERT CODE ~~~~
-        for item in response:
-          cacheFile.write(item)
+        cacheFile.write(response) # write the entire response to the cache file
         # ~~~~ END CODE INSERT ~~~~
         cacheFile.close()
         print ('cache file closed')
