@@ -191,7 +191,7 @@ while True:
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
-      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n\r\n'
+      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n'
 
       # Request the web resource from origin server
       print ('Forwarding request to origin server:')
