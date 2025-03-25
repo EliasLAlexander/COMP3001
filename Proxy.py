@@ -74,12 +74,12 @@ def proxy():
     # ~~~~ INSERT CODE ~~~~
     message_bytes = clientSocket.recv(4096) # receive message from client
     # ~~~~ END CODE INSERT ~~~~
-    # message = message_bytes.decode('utf-8')
+    message = message_bytes.decode('utf-8')
     print ('Received request:')
-    print ('< ' + message_bytes)
+    print ('< ' + message)
 
     # Extract the method, URI and version of the HTTP client request 
-    requestParts = message_bytes.split()
+    requestParts = message.split()
     method = requestParts[0]
     URI = requestParts[1]
     version = requestParts[2]
