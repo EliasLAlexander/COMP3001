@@ -176,7 +176,7 @@ while True:
       address = socket.gethostbyname(hostname)
       # Connect to the origin server
       # ~~~~ INSERT CODE ~~~~
-      originServerSocket.connect((address, proxyPort))
+      originServerSocket.connect((address, 80))
       # ~~~~ END CODE INSERT ~~~~
       print ('Connected to origin Server')
 
