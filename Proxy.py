@@ -145,7 +145,7 @@ while True:
       # check if the cache is reusable
       if 'Cache-Control' in data:
         cache_control = data.split(':', 1)[1]
-        if cache_control == 'no-cache' #RFC 2616. 14.9.1
+        if cache_control == 'no-cache': #RFC 2616. 14.9.1
           print('Cache is not reusable')
           break
       
