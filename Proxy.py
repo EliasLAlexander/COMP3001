@@ -126,28 +126,22 @@ while True:
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
     # check if the cache is still valid by checking the status code
-    cache_status = cacheData[0].split(' ')[1] 
-    if not cacheData or len(cacheData[0].split()) < 2:
-      print("Cache file is empty or invalid. Fetching from origin server.")
-      raise Exception("Invalid cache data")
+    cache_status = cacheData[0].split(' ')[1]
+
 
     # if cache is moved permanently or redirected, send the client to original server
     cache_valid = True 
     if cache_status == '301' or cache_status == '302':
       print('Cache is moved permanently or redirected')
       # extract the new location from the cache and set the new location
-      hostname, resource = cacheLocation.split('=')[1].split('&')[0].split('/')[2]
-      resource = '/' 
-      cache_valid = False
-    else:
-      pass 
+      hostname, resource = cacheLocation.split('=')[1].split('&')[0].split('/')[2], '/'
     
     # extract the cache control header from the cache
     for data in cacheData:
       # calculate the age of the cache
       if 'Date' in data:
         cache_time = data.split(':', 1)[1].strip()
-        # Define the expected date format according to RFC 2616
+        # define the expected date format according to RFC 2616
         date_format = "%a, %d %b %Y %H:%M:%S GMT"
         # calculate the age of the cache
         cache_age = (datetime.datetime.now(timezone.utc) - datetime.datetime.strptime(cache_time, date_format).replace(tzinfo=timezone.utc)).total_seconds()
@@ -155,7 +149,7 @@ while True:
       # check if the cache is reusable
       if 'Cache-Control' in data:
         cache_control = data.split(':', 1)[1]
-        if cache_control == 'no-cache'or cache_control == 'no-store': #RFC 2616. 14.9.1
+        if cache_control == 'no-cache' or cache_control == 'no-store': #RFC 2616. 14.9.1
           print('Cache is not reusable')
           cache_valid = False
       
@@ -170,13 +164,13 @@ while True:
       else:
         for item in cacheData:
           clientSocket.send(item)
-          exit()
+          #exit()
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
-    print ('> ' + ' '.join(cacheData))
+    print ('> ' + ''.join(cacheData))
   
-  except OSError:
+  except:
     # cache miss.  Get resource from origin server
     originServerSocket = None
     # Create a socket to connect to origin server
@@ -207,7 +201,7 @@ while True:
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
-      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n\r\n'
+      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n'
 
       # Request the web resource from origin server
       print ('Forwarding request to origin server:')
