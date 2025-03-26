@@ -69,7 +69,6 @@ while True:
     sys.exit()
   
   # Receive message from client and get the data in the buffer size
-  message_bytes = 'METHOD URI VERSION'
   # Get HTTP request from client
   # and store it in the variable: message_bytes
   # ~~~~ INSERT CODE ~~~~
@@ -130,41 +129,50 @@ while True:
     cache_status = cacheData[0].split(' ')[1] 
 
     # if cache is moved permanently or redirected, send the client to original server
+    cache_valid = True 
     if cache_status == '301' or cache_status == '302':
+      print('Cache is moved permanently or redirected')
       # extract the new location from the cache and set the new location
-      hostname, resource = cacheLocation.split('=')[1].split('&')[0].split('/')[2], '/'
+      hostname, resource = cacheLocation.split('=')[1].split('&')[0].split('/')[2]
+      resource = '/' 
+      cache_valid = False
+    else:
+      pass 
     
     # extract the cache control header from the cache
     for data in cacheData:
       # calculate the age of the cache
       if 'Date' in data:
         cache_time = data.split(':', 1)[1]
+        # calculate the age of the cache
         cache_age = (datetime.datetime.now(timezone('UTC')).replace(tzinfo=None) - 
                               datetime.datetime(*email.utils.parsedate(cache_time)[:6])).total_seconds()
       
       # check if the cache is reusable
       if 'Cache-Control' in data:
         cache_control = data.split(':', 1)[1]
-        if cache_control == 'no-cache': #RFC 2616. 14.9.1
+        if cache_control == 'no-cache'or cache_control == 'no-store': #RFC 2616. 14.9.1
           print('Cache is not reusable')
-          break
+          cache_valid = False
       
       # check if the cache is still valid
-      if 'max_age' in data and int(line.split(',')[1].split('=')[1]) <= cache_age:
+      if 'max_age' in data and int(data.split(',')[1].split('=')[1]) <= cache_age:
         print('Cache is expired')
-        break
-
+        cache_valid = False
+      
+      if cache_valid == False:
+        open('OSError', 'r')
       # use connection socket to send the cache data to the client
       else:
         for item in cacheData:
           clientSocket.send(item)
-          #exit()
+          exit()
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
     print ('> ' + ''.join(cacheData))
   
-  except:
+  except OSError:
     # cache miss.  Get resource from origin server
     originServerSocket = None
     # Create a socket to connect to origin server
@@ -195,7 +203,7 @@ while True:
       # ~~~~ END CODE INSERT ~~~~
 
       # Construct the request to send to the origin server
-      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n'
+      request = originServerRequestLine + '\r\n' + originServerRequestHeader + '\r\n\r\n'
 
       # Request the web resource from origin server
       print ('Forwarding request to origin server:')
@@ -215,6 +223,23 @@ while True:
       response = ''
       #receive the response from the origin server if not in cache
       response = originServerSocket.recv(1024) 
+
+      # validate the response from the origin server
+      cached_response = True 
+
+      response_parts = response.split('\r\n')
+      response_status = response_parts[0]
+
+      # check the response status code
+      if response_status == '200':
+        print('retrieve the response from the origin server')
+      elif response_status == '301':
+        print ('URL moved permanently')
+      elif response_status == '302':
+        print('URL moved temporarily')
+      elif response_status == '404':
+        cached_response = False
+        print('URL not found')
       # ~~~~ END CODE INSERT ~~~~
 
       # Send the response to the client
@@ -222,24 +247,26 @@ while True:
       clientSocket.send(response)
       # ~~~~ END CODE INSERT ~~~~
 
+      if cached_response == True:
       # Create a new file in the cache for the requested file.
-      cacheDir, file = os.path.split(cacheLocation)
-      print ('cached directory ' + cacheDir)
-      if not os.path.exists(cacheDir):
-        os.makedirs(cacheDir)
-      cacheFile = open(cacheLocation, 'wb')
+        cacheDir, file = os.path.split(cacheLocation)
+        print ('cached directory ' + cacheDir)
+        if not os.path.exists(cacheDir):
+          os.makedirs(cacheDir)
+        cacheFile = open(cacheLocation, 'wb')
 
       # Save origin server response in the cache file
       # ~~~~ INSERT CODE ~~~~
-      for data in response:
-        cacheFile.write(data) # write the entire response to the cache file
+      for lines in response:
+        cacheFile.write(lines) # write the entire response to the cache file
       # ~~~~ END CODE INSERT ~~~~
       cacheFile.close()
       print ('cache file closed')
 
       # finished communicating with origin server - shutdown socket writes
+
       print ('origin response received. Closing sockets')
-      originServerSocket.close()
+      originServerSocket.shutdown(socket.SHUT_WR)
       
       clientSocket.shutdown(socket.SHUT_WR)
       print ('client socket shutdown for writing')
