@@ -127,6 +127,9 @@ while True:
     # ~~~~ INSERT CODE ~~~~
     # check if the cache is still valid by checking the status code
     cache_status = cacheData[0].split(' ')[1] 
+    if not cacheData or len(cacheData[0].split()) < 2:
+      print("Cache file is empty or invalid. Fetching from origin server.")
+      raise Exception("Invalid cache data")
 
     # if cache is moved permanently or redirected, send the client to original server
     cache_valid = True 
@@ -170,7 +173,7 @@ while True:
     # ~~~~ END CODE INSERT ~~~~
     cacheFile.close()
     print ('Sent to the client:')
-    print ('> ' + ''.join(cacheData))
+    print ('> ' + ' '.join(cacheData))
   
   except OSError:
     # cache miss.  Get resource from origin server
