@@ -7,7 +7,7 @@ import re
 
 import email.utils
 import datetime
-from datetime import timezone
+from datetime import timezone, datetime
 
 
 # 1MB buffer size
@@ -146,10 +146,11 @@ while True:
     for data in cacheData:
       # calculate the age of the cache
       if 'Date' in data:
-        cache_time = data.split(':', 1)[1]
+        cache_time = data.split(':', 1)[1].strip()
+        # Define the expected date format according to RFC 2616
+        date_format = "%a, %d %b %Y %H:%M:%S GMT"
         # calculate the age of the cache
-        cache_age = (datetime.datetime.now(timezone.utc) - 
-             datetime.datetime(*email.utils.parsedate(cache_time)[:6], tzinfo=timezone.utc)).total_seconds()
+        cache_age = (datetime.datetime.now(timezone.utc) - datetime.datetime.strptime(cache_time, date_format).replace(tzinfo=timezone.utc)).total_seconds()
       
       # check if the cache is reusable
       if 'Cache-Control' in data:
