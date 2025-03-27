@@ -5,14 +5,12 @@ import os
 import argparse
 import re
 
-import email.utils
 import datetime
 from datetime import timezone, datetime
 
 
 # 1MB buffer size
 BUFFER_SIZE = 1000000
-
 
 # Get the IP address and Port number to use for this web proxy server
 parser = argparse.ArgumentParser()
@@ -119,6 +117,8 @@ while True:
     
     # Check whether the file is currently in the cache
     cacheFile = open(cacheLocation, "r")
+    print (cacheFile.read())
+
     cacheData = cacheFile.readlines()
 
     print ('Cache hit! Loading from cache file: ' + cacheLocation)
@@ -126,6 +126,7 @@ while True:
     # Send back response to client 
     # ~~~~ INSERT CODE ~~~~
     # check if the cache is still valid by checking the status code
+    print(cacheData)
     cache_status = cacheData[0].split(' ')[1]
 
 
@@ -140,7 +141,7 @@ while True:
     for data in cacheData:
       # calculate the age of the cache
       if 'Date' in data:
-        cache_time = data.split(':', 1)[1].strip()
+        cache_time = data.split(':', 1)[1]
         # define the expected date format according to RFC 2616
         date_format = "%a, %d %b %Y %H:%M:%S GMT"
         # calculate the age of the cache
@@ -264,7 +265,7 @@ while True:
       # finished communicating with origin server - shutdown socket writes
 
       print ('origin response received. Closing sockets')
-      originServerSocket.shutdown(socket.SHUT_WR)
+      originServerSocket.close()
       
       clientSocket.shutdown(socket.SHUT_WR)
       print ('client socket shutdown for writing')
