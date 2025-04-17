@@ -179,15 +179,30 @@ void A_timerinterrupt(void)
 
   if (TRACE > 0)
     printf("----A: time out,resend packets!\n");
-
-  for(i=0; i<windowcount; i++) {
-
+  
+  /* if no packets in window, do nothing */
+  if (windowcount == 0) {
     if (TRACE > 0)
-      printf ("---A: resending packet %d\n", (buffer[(windowfirst+i) % WINDOWSIZE]).seqnum);
+      printf("----A: no packets in window, do nothing!\n");
+    return;
+  }
 
-    tolayer3(A,buffer[(windowfirst+i) % WINDOWSIZE]);
+  /* if window is not empty, resend the packet not ACKed in window */
+  for (i=0; i<WINDOWSIZE; i++) {
+    int index = (windowfirst + i) % WINDOWSIZE;
+
+    if (buffer[index].acknum != 0) {
+      if (TRACE > 0)
+        printf("----A: resend packet %d\n", buffer[index].seqnum);
+    }
+
+    /* resend the packet to layer3 */
+    tolayer3(A,buffer[index]);
     packets_resent++;
-    if (i==0) starttimer(A,RTT);
+
+    /* start timer for resent packet */
+    starttimer(A,RTT);
+    break;
   }
 }       
 
@@ -205,6 +220,8 @@ void A_init(void)
 		     so initially this is set to -1
 		   */
   windowcount = 0;
+  /* init the ackcount */
+  ackcount = 0;
 }
 
 
