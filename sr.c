@@ -24,7 +24,7 @@
 
 #define RTT  16.0       /* round trip time.  MUST BE SET TO 16.0 when submitting assignment */
 #define WINDOWSIZE 6    /* the maximum number of buffered unacked packet */
-#define SEQSPACE 7      /* the min sequence space for GBN must be at least windowsize + 1 */
+#define SEQSPACE 12      /* two times window size for selective repeat */
 #define NOTINUSE (-1)   /* used to fill header fields that are not being used */
 
 /* generic procedure to compute the checksum of a packet.  Used by both sender and receiver  
@@ -60,6 +60,7 @@ static struct pkt buffer[WINDOWSIZE];  /* array for storing packets waiting for 
 static int windowfirst, windowlast;    /* array indexes of the first/last packet awaiting ACK */
 static int windowcount;                /* the number of packets currently awaiting an ACK */
 static int A_nextseqnum;               /* the next sequence number to be used by the sender */
+static int ackcount;              /* the number of ACKs received */
 
 /* called from layer 5 (application layer), passed the message to be sent to other side */
 void A_output(struct msg message)
@@ -111,16 +112,17 @@ void A_output(struct msg message)
 */
 void A_input(struct pkt packet)
 {
-  int ackcount = 0;
+  /* int ackcount = 0; */   /* not resetting because of windows sliding */
   int i;
 
   /* if received ACK is not corrupted */ 
   if (!IsCorrupted(packet)) {
     if (TRACE > 0)
       printf("----A: uncorrupted ACK %d is received\n",packet.acknum);
-    total_ACKs_received++;
+    total_ACKs_received++; /* increase ACK and RESTART timer */
 
     /* check if new ACK or duplicate */
+    /* get the sequence number of first and last packet */
     if (windowcount != 0) {
           int seqfirst = buffer[windowfirst].seqnum;
           int seqlast = buffer[windowlast].seqnum;
@@ -133,18 +135,26 @@ void A_input(struct pkt packet)
               printf("----A: ACK %d is not a duplicate\n",packet.acknum);
             new_ACKs++;
 
-            /* cumulative acknowledgement - determine how many packets are ACKed */
-            if (packet.acknum >= seqfirst)
-              ackcount = packet.acknum + 1 - seqfirst;
-            else
-              ackcount = SEQSPACE - seqfirst + packet.acknum;
+            /* implement SR */
+            int buffer_index = packet.acknum % WINDOWSIZE;
+            buffer[buffer_index].acknum = 0; /* 0 means ACKed */
+            
+            /* count the number of ACKs received */
+            ackcount ++;
+            /* reduce the number of packets waiting for ACK*/
+            windowcount --;
 
-	    /* slide window by the number of packets ACKed */
-            windowfirst = (windowfirst + ackcount) % WINDOWSIZE;
+	          /* slide window by the number of packets ACKed */
 
-            /* delete the acked packets from window buffer */
-            for (i=0; i<ackcount; i++)
-              windowcount--;
+            while (windowcount > 0 && buffer[windowfirst].acknum == 0) {
+              windowfirst = (windowfirst + 1) % WINDOWSIZE;
+              ackcount--;
+            }
+            // windowfirst = (windowfirst + ackcount) % WINDOWSIZE;
+
+            // /* delete the acked packets from window buffer */
+            // for (i=0; i<ackcount; i++)
+            //   windowcount--;
 
 	    /* start timer again if there are still more unacked packets in window */
             stoptimer(A);
