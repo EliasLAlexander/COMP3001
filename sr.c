@@ -113,7 +113,7 @@ void A_output(struct msg message)
 void A_input(struct pkt packet)
 {
   /* int ackcount = 0; */   /* not resetting because of windows sliding */
-  int i;
+  /* int i */
 
   /* if received ACK is not corrupted */ 
   if (!IsCorrupted(packet)) {
@@ -150,11 +150,6 @@ void A_input(struct pkt packet)
               windowfirst = (windowfirst + 1) % WINDOWSIZE;
               ackcount--;
             }
-            // windowfirst = (windowfirst + ackcount) % WINDOWSIZE;
-
-            // /* delete the acked packets from window buffer */
-            // for (i=0; i<ackcount; i++)
-            //   windowcount--;
 
 	    /* start timer again if there are still more unacked packets in window */
             stoptimer(A);
@@ -238,9 +233,11 @@ void B_input(struct pkt packet)
 {
   struct pkt ackpkt;
   int i;
+  int window_end = (expectedseqnum -1 + WINDOWSIZE) % SEQSPACE; /* last seq num in window*/
+  bool in_window;
 
   /* proceed if not corrupted and received packet is in order */
-  if   (!IsCorrupted(packet)) {
+  if (!IsCorrupted(packet)) {
     if (TRACE > 0)
       printf("----B: packet %d is correctly received, send ACK!\n",packet.seqnum);
 
@@ -259,11 +256,13 @@ void B_input(struct pkt packet)
     packets_received++; /* increase the number of packets sent */
     
     /*check if the packet is still within the window*/
-    int window_end = (expectedseqnum -1 + WINDOWSIZE) % SEQSPACE; /* last seq num in window*/
-    bool in_window = (expectedseqnum <= window_end)
-    ?
-      (packet.seqnum >= expectedseqnum && packet.seqnum <= window_end) :
-      (packet.seqnum >= expectedseqnum || packet.seqnum <= window_end);
+    if (expectedseqnum <= window_end) {
+      /* sequence numbers are in a straight range */
+      in_window = (packet.seqnum >= expectedseqnum && packet.seqnum <= window_end);
+    } else {
+      // Wraparound: valid sequence numbers are split across SEQSPACE wrap
+      in_window = (packet.seqnum >= expectedseqnum || packet.seqnum <= window_end);
+  }
     
     if (in_window) {
       /* deliver to receiving application */
