@@ -230,6 +230,8 @@ void A_init(void)
 
 static int expectedseqnum; /* the sequence number expected next by the receiver */
 static int B_nextseqnum;   /* the sequence number for the next packets sent by B */
+static struct pkt receiver_buffer[WINDOWSIZE];  /* array for storing received packets */
+static int receiver_windowfirst;    /* array indexes of the first received packet */
 
 
 /* called from layer 3, when a packet arrives for layer 4 at B*/
@@ -238,11 +240,15 @@ void B_input(struct pkt packet)
   struct pkt sendpkt;
   int i;
 
-  /* if not corrupted and received packet is in order */
-  if  ( (!IsCorrupted(packet))  && (packet.seqnum == expectedseqnum) ) {
+  /* proceed if not corrupted and received packet is in order */
+  if   (!IsCorrupted(packet)) {
     if (TRACE > 0)
       printf("----B: packet %d is correctly received, send ACK!\n",packet.seqnum);
-    packets_received++;
+
+    /* create ACK packet for sending back*/
+    sendpkt.acknum = packet.seqnum; 
+    sendpkt.seqnum = B_nextseqnum; /* SR always sends next ACK number */
+    B_nextseqnum = (B_nextseqnum + 1) % SEQSPACE;
 
     /* deliver to receiving application */
     tolayer5(B, packet.payload);
@@ -262,7 +268,7 @@ void B_input(struct pkt packet)
     else
       sendpkt.acknum = expectedseqnum - 1;
   }
-
+}
   /* create packet */
   sendpkt.seqnum = B_nextseqnum;
   B_nextseqnum = (B_nextseqnum + 1) % 2;
