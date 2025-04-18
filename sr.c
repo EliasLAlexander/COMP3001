@@ -118,7 +118,7 @@ void A_input(struct pkt packet)
   /* if received ACK is not corrupted */ 
   if (!IsCorrupted(packet)) {
     if (TRACE > 0)
-      printf("----A: uncorrupted ACK %d is received\n",packet.acknum);
+      printf("----B: packet %d is correctly received, send ACK!\n",packet.acknum);
     total_ACKs_received++; /* increase ACK and RESTART timer */
 
     /* check if new ACK or duplicate */
@@ -187,7 +187,7 @@ void A_timerinterrupt(void)
 
     if (buffer[index].acknum != 0) {
       if (TRACE > 0)
-        printf("----A: resend packet %d\n", buffer[index].seqnum);
+        printf("----A: resending packet %d\n", buffer[index].seqnum);
     }
 
     /* resend the packet to layer3 */
