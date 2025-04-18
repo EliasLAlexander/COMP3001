@@ -256,10 +256,10 @@ void B_input(struct pkt packet)
     
     /*check if the packet is still within the window*/
     if (expectedseqnum <= window_end) {
-      /* sequence numbers are in a straight range */
+      /* sequence numbers in current range */
       in_window = (packet.seqnum >= expectedseqnum && packet.seqnum <= window_end);
     } else {
-      // Wraparound: valid sequence numbers are split across SEQSPACE wrap
+      /* sequence numbers in next window range */
       in_window = (packet.seqnum >= expectedseqnum || packet.seqnum <= window_end);
   }
     
