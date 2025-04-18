@@ -207,7 +207,6 @@ void A_timerinterrupt(void)
 }       
 
 
-
 /* the following routine will be called once (only) before any other */
 /* entity A routines are called. You can use it to do any initialization */
 void A_init(void)
@@ -290,6 +289,7 @@ void B_init(void)
 {
   expectedseqnum = 0;
   B_nextseqnum = 1;
+  receiver_windowfirst = 0; /* first packet in receiver buffer */
 }
 
 /******************************************************************************
