@@ -136,8 +136,7 @@ void A_input(struct pkt packet)
             new_ACKs++;
 
             /* implement SR */
-            int buffer_index = packet.acknum % WINDOWSIZE;
-            buffer[buffer_index].acknum = 0; /* 0 means ACKed */
+            buffer[packet.acknum % WINDOWSIZE].acknum = 0; /* 0 means ACKed */
             
             /* count the number of ACKs received */
             ackcount ++;
