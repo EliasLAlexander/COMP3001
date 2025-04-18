@@ -100,7 +100,7 @@ void A_output(struct msg message)
   }
   /* if blocked,  window is full */
   else {
-    if (TRACE > 0)
+    if (TRACE == 1)
       printf("----A: New message arrives, send window is full\n");
     window_full++;
   }
@@ -158,11 +158,11 @@ void A_input(struct pkt packet)
           }
         }
         else
-          if (TRACE > 0)
+          if (TRACE == 1)
         printf ("----A: duplicate ACK received, do nothing!\n");
   }
   else 
-    if (TRACE > 0)
+    if (TRACE == 1)
       printf ("----A: corrupted ACK is received, do nothing!\n");
 }
 
@@ -176,7 +176,7 @@ void A_timerinterrupt(void)
   
   /* if no packets in window, do nothing */
   if (windowcount == 0) {
-    if (TRACE > 0)
+    if (TRACE == 1)
       printf("----A: no packets in window, do nothing!\n");
     return;
   }
