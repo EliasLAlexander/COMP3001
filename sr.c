@@ -270,20 +270,19 @@ void B_input(struct pkt packet)
       /* deliver to receiving application */
       tolayer5(B, packet.payload);
 
-      /* update expected sequence number */
-      expectedseqnum = (expectedseqnum + 1) % SEQSPACE;        
-    }
-    else {
-      if (TRACE > 0) 
-        printf("----B: packet corrupted or not expected sequence number, resend ACK!\n");
-      if (expectedseqnum == 0)
-        ackpkt.acknum = SEQSPACE - 1;
-      else
-        ackpkt.acknum = expectedseqnum - 1;
+      for (i = 0; i < WINDOWSIZE; i++) {
+        /* out of order pkt */
+        if(receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum) 
+          break;
+          /* deliver to receiving application */
+        tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
+        receiver_windowfirst = (receiver_windowfirst + 1) % WINDOWSIZE;
+        expectedseqnum = (expectedseqnum + 1) % SEQSPACE; /* increment expected seq num */
+        
+      }
     }
   }
 }
-
 
 /* the following routine will be called once (only) before any other */
 /* entity B routines are called. You can use it to do any initialization */
