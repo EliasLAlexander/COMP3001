@@ -118,7 +118,7 @@ void A_input(struct pkt packet)
   /* if received ACK is not corrupted */ 
   if (!IsCorrupted(packet)) {
     if (TRACE > 0)
-      printf("----A: uncorrupted ACK %d is received\n" ,packet.acknum);
+      printf("----A: uncorrupted ACK %d is received\n",packet.acknum);
     total_ACKs_received++; /* increase ACK and RESTART timer */
 
     /* check if new ACK or duplicate */
@@ -175,19 +175,19 @@ void A_timerinterrupt(void)
     printf("----A: time out,resend packets!\n");
   
   /* if no packets in window, do nothing */
-  /* if (windowcount == 0) {
-  //   if (TRACE == 1)
-  //     printf("----A: no packets in window, do nothing!\n");
-  //   return;
-  // }
-  */
+  if (windowcount == 0) {
+   if (TRACE == 1)
+       printf("----A: no packets in window, do nothing!\n");
+     return;
+ }
+ 
 
   /* if window is not empty, resend the packet not ACKed in window */
   for (i=0; i<WINDOWSIZE; i++) {
 
     if (buffer[(windowfirst + i) % WINDOWSIZE].acknum != 0) {
       if (TRACE > 0)
-        printf("----A: resending packet %d\n", (buffer[(windowfirst + i) % WINDOWSIZE]).seqnum);
+        printf("---A: resending packet %d\n", (buffer[(windowfirst + i) % WINDOWSIZE]).seqnum);
     }
 
     /* resend the packet to layer3 */
