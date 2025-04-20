@@ -247,7 +247,7 @@ void B_input(struct pkt packet)
 
     /* we don't have any data to send.  fill payload with 0's */
     for ( i=0; i<20 ; i++ ) 
-    ackpkt.payload[i] = '0';  /* filler in ACK packet */
+      ackpkt.payload[i] = '0';  /* filler in ACK packet */
 
     ackpkt.checksum = ComputeChecksum(ackpkt); /* compute checksum to ensure ACK packet not corrupted*/
     tolayer3 (B, ackpkt); /* send ACK packet to layer 3 */
