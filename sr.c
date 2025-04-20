@@ -175,11 +175,12 @@ void A_timerinterrupt(void)
     printf("----A: time out,resend packets!\n");
   
   /* if no packets in window, do nothing */
-  if (windowcount == 0) {
-    if (TRACE == 1)
-      printf("----A: no packets in window, do nothing!\n");
-    return;
-  }
+  /* if (windowcount == 0) {
+  //   if (TRACE == 1)
+  //     printf("----A: no packets in window, do nothing!\n");
+  //   return;
+  // }
+  */
 
   /* if window is not empty, resend the packet not ACKed in window */
   for (i=0; i<WINDOWSIZE; i++) {
