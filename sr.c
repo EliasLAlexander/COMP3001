@@ -187,7 +187,7 @@ void A_timerinterrupt(void)
 
     if (buffer[(windowfirst + i) % WINDOWSIZE].acknum != 0) {
       if (TRACE > 0)
-        printf("---A: resending packet %d\n", (buffer[(windowfirst + i) % WINDOWSIZE]).seqnum);
+        printf("---A: resending packet %d\n", (buffer[(windowfirst+i) % WINDOWSIZE]).seqnum);
     }
 
     /* resend the packet to layer3 */
@@ -279,6 +279,10 @@ void B_input(struct pkt packet)
       }
     }
   }
+  else
+    if (TRACE == 1)
+      printf("----B: packet corrupted or not expected sequence number, resend ACK!\n");
+
 }
 
 /* the following routine will be called once (only) before any other */
