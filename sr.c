@@ -100,7 +100,7 @@ void A_output(struct msg message)
   }
   /* if blocked,  window is full */
   else {
-    if (TRACE == 1)
+    if (TRACE > 0)
       printf("----A: New message arrives, send window is full\n");
     window_full++;
   }
@@ -158,11 +158,11 @@ void A_input(struct pkt packet)
           }
         }
         else
-          if (TRACE == 1)
+          if (TRACE > 0)
         printf ("----A: duplicate ACK received, do nothing!\n");
   }
   else 
-    if (TRACE == 1)
+    if (TRACE > 0)
       printf ("----A: corrupted ACK is received, do nothing!\n");
 }
 
