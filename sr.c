@@ -251,7 +251,6 @@ void B_input(struct pkt packet)
 
     ackpkt.checksum = ComputeChecksum(ackpkt); /* compute checksum to ensure ACK packet not corrupted*/
     tolayer3 (B, ackpkt); /* send ACK packet to layer 3 */
-
     packets_received++; /* increase the number of packets sent */
     
     /*check if the packet is still within the window*/
@@ -265,7 +264,7 @@ void B_input(struct pkt packet)
     
     if (in_window) {
       /* deliver to receiving application */
-      tolayer5(B, packet.payload);
+      // tolayer5(B, packet.payload);
 
       for (i = 0; i < WINDOWSIZE; i++) {
         if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
