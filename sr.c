@@ -264,7 +264,7 @@ void B_input(struct pkt packet)
     
     if (in_window) {
       /* deliver to receiving application */
-      // tolayer5(B, packet.payload);
+      /* tolayer5(B, packet.payload); */ 
 
       for (i = 0; i < WINDOWSIZE; i++) {
         if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
