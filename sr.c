@@ -268,15 +268,13 @@ void B_input(struct pkt packet)
       tolayer5(B, packet.payload);
 
       for (i = 0; i < WINDOWSIZE; i++) {
-        /* out of order pkt */
-        if(receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum) 
+        if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
           break;
-          /* deliver to receiving application */
+      
         tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
         receiver_windowfirst = (receiver_windowfirst + 1) % WINDOWSIZE;
-        expectedseqnum = (expectedseqnum + 1) % SEQSPACE; /* increment expected seq num */
-        
-      }
+        expectedseqnum = (expectedseqnum + 1) % SEQSPACE;
+      }      
     }
   }
   else
