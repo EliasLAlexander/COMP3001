@@ -263,19 +263,17 @@ void B_input(struct pkt packet)
       /* sequence numbers in next window range */
       in_window = (packet.seqnum >= expectedseqnum || packet.seqnum <= window_end);
   }
+    /* store the packet in the receiver buffer at the appropriate position */
+    receiver_buffer[packet.seqnum % WINDOWSIZE] = packet;
     
     if (in_window) {
-      /* store the packet in the receiver buffer at the appropriate position */
-      receiver_buffer[packet.seqnum % WINDOWSIZE] = packet;
-
       /* deliver to receiving application */
       /* tolayer5(B, packet.payload); */ 
-
       for (i = 0; i < WINDOWSIZE; i++) {
-        if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
+        if (receiver_buffer[receiver_windowfirst].seqnum != expectedseqnum)
           break;
       
-        tolayer5(B, receiver_buffer[expectedseqnum % WINDOWSIZE].payload);
+        tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
         receiver_windowfirst = (receiver_windowfirst + 1) % WINDOWSIZE;
         expectedseqnum = (expectedseqnum + 1) % SEQSPACE;
       }      
