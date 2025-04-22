@@ -1,3 +1,15 @@
+commit 74cf6abc07371e0914701693b07466f826131acb
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 14:24:20 2025 +0930
+
+    "debug: store the packet in buffer before checking seqnum"
+
+commit e2c100a8b5c480e41799221be6c0902c583d2c52
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 14:07:20 2025 +0930
+
+    "output git log history"
+
 commit 0a112507ea08b015882165b28e5d42c1d0a85e53
 Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
 Date:   Tue Apr 22 14:01:19 2025 +0930

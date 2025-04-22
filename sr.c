@@ -265,7 +265,7 @@ void B_input(struct pkt packet)
   }
     /* store the packet in the receiver buffer at the appropriate position */
     receiver_buffer[packet.seqnum % WINDOWSIZE] = packet;
-    
+
     if (in_window) {
       /* deliver to receiving application */
       /* tolayer5(B, packet.payload); */ 
@@ -273,7 +273,7 @@ void B_input(struct pkt packet)
         if (receiver_buffer[receiver_windowfirst].seqnum != expectedseqnum)
           break;
       
-        tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
+        tolayer5(B, receiver_buffer[windowfirst].payload);
         receiver_windowfirst = (receiver_windowfirst + 1) % WINDOWSIZE;
         expectedseqnum = (expectedseqnum + 1) % SEQSPACE;
       }      
