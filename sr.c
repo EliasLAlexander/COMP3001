@@ -145,24 +145,23 @@ void A_input(struct pkt packet)
 
 	          /* slide window by the number of packets ACKed */
             if (buffer[windowfirst].seqnum == packet.acknum) {
-              for (i = 0; i < windowcount; i++) {
-                if (buffer[windowfirst].acknum != 0)
-                  break;
-                
-                windowfirst = (windowfirst + 1) % WINDOWSIZE;
-                ackcount--;
-              }
-            }  
-            
+              for (i = 0; i < WINDOWSIZE; i++) {
+                if (buffer[windowfirst].acknum == 0) {
+                  windowfirst = (windowfirst + 1) % WINDOWSIZE;
+                  ackcount--;
+                }
+              }  
+          
 	    /* start timer again if there are still more unacked packets in window */
             stoptimer(A);
             if (windowcount > 0)
               starttimer(A, RTT);
           }
         }
-        else
-          if (TRACE > 0)
-        printf ("----A: duplicate ACK received, do nothing!\n");
+      }
+      else
+        if (TRACE > 0)
+      printf ("----A: duplicate ACK received, do nothing!\n");
   }
   else 
     if (TRACE > 0)
@@ -184,22 +183,22 @@ void A_timerinterrupt(void)
      return;
  }
  
-
-  /* if window is not empty, resend the packet not ACKed in window */
-  for (i=0; i<WINDOWSIZE; i++) {
-
-    if (buffer[(windowfirst + i) % WINDOWSIZE].acknum != 0) {
-      if (TRACE > 0)
-        printf("---A: resending packet %d\n", (buffer[(windowfirst+i) % WINDOWSIZE]).seqnum);
+  if (windowcount > 0) {
+      /* if window is not empty, resend the packet not ACKed in window */
+    for (i=0; i<WINDOWSIZE; i++) {
+      if (buffer[(windowfirst + i) % WINDOWSIZE].acknum != 0) {
+        /* resending the packet to layer3 */
+        if (TRACE > 0)
+          printf ("---A: resending packet %d\n", (buffer[(windowfirst+i) % WINDOWSIZE]).seqnum);
+        
+        tolayer3(A,buffer[(windowfirst+i) % WINDOWSIZE]);
+        packets_resent++;
+        
+        /* start timer for every packet */
+        starttimer(A,RTT);
+        break;
+      }   
     }
-
-    /* resend the packet to layer3 */
-    tolayer3(A,buffer[(windowfirst + i) % WINDOWSIZE]);
-    packets_resent++;
-
-    /* start timer for resent packet */
-    starttimer(A,RTT);
-    break;
   }
 }       
 
@@ -285,7 +284,6 @@ void B_input(struct pkt packet)
   else
     if (TRACE == 1)
       printf("----B: packet corrupted or not expected sequence number, resend ACK!\n");
-
 }
 
 /* the following routine will be called once (only) before any other */
