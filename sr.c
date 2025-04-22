@@ -145,13 +145,15 @@ void A_input(struct pkt packet)
 
 	          /* slide window by the number of packets ACKed */
             if (buffer[windowfirst].seqnum == packet.acknum) {
-              for (i=0; i<WINDOWSIZE; i++) {
-                if (buffer[windowfirst].acknum == 0){
-                  windowfirst = (windowfirst + 1) % WINDOWSIZE;
-                  ackcount--;
-                }
-              }  
-            }
+              for (i = 0; i < windowcount; i++) {
+                if (buffer[windowfirst].acknum != 0)
+                  break;
+                
+                windowfirst = (windowfirst + 1) % WINDOWSIZE;
+                ackcount--;
+              }
+            }  
+            
 	    /* start timer again if there are still more unacked packets in window */
             stoptimer(A);
             if (windowcount > 0)
@@ -264,6 +266,9 @@ void B_input(struct pkt packet)
   }
     
     if (in_window) {
+      // store the packet in the receiver buffer at the appropriate position
+      receiver_buffer[packet.seqnum % WINDOWSIZE] = packet;
+
       /* deliver to receiving application */
       /* tolayer5(B, packet.payload); */ 
 
