@@ -1,0 +1,498 @@
+commit 0a112507ea08b015882165b28e5d42c1d0a85e53
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 14:01:19 2025 +0930
+
+    "debug: buffer the packet before matching seqnum"
+
+commit 3f18f6991639c9c3885d3218bee96c9f7c4db83b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 13:17:17 2025 +0930
+
+    "debug: syntax error"
+
+commit 6410df4c74e76ad2f62755df4138a488579c03b3
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 13:09:56 2025 +0930
+
+    "debugging: modify A input, limit slide window limit to windows size instead of window count"
+
+commit f41f6f854017dacae89ef9d4bea7257962b90c1c
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 12:51:25 2025 +0930
+
+    "modify window limit to teminate loop"
+
+commit 6e82a3533484b8cdf1f4de1590110c7385a4eff4
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 12:42:09 2025 +0930
+
+    "debugging: ensure windows is sliding by updating windowcount"
+
+commit 372ca4e47d728d5419bd9a1b7d0ea298070228b5
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Apr 22 12:25:02 2025 +0930
+
+    "modify the buffer to check first element in receiver window to avoid infinite loop"
+
+commit 0cb1c8a10642802fc3131da2d12e7606982eb143
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 12:11:57 2025 +0930
+
+    "correct syntax error"
+
+commit c1b2662efee2d4782d5e4891f7edad6caf6bc0da
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 12:04:43 2025 +0930
+
+    "debugging: duplicate delivery to layer 5"
+
+commit 288af61ffb30116e8bf96a97f7ba2ef923391f9c
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:59:40 2025 +0930
+
+    "modify receiver logic"
+
+commit 463cd26289062ff58c36a49dfac55db1f535f310
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:54:12 2025 +0930
+
+    "fix incorrect package delivery behaviour at receiver"
+
+commit 30ecb013d3e21bce23f1c84290459c71aac2ee7f
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:39:11 2025 +0930
+
+    "add print out message when packet is corrupted or not expected sequence number"
+
+commit 5bc627324ca545bc5c87f6b5296332ff9f3ebd11
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:32:17 2025 +0930
+
+    "modify TRACE check"
+
+commit 2a1e779bac931c8e4b03b1b5bffa01aaaf8e065b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:26:40 2025 +0930
+
+    "modify TRACE check level"
+
+commit b82ed08da2635a2333da6d33e3ccaabf97534834
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:22:02 2025 +0930
+
+    "A1 files folder added"
+
+commit 667bb7229cbc59e688363871f3e350ff43dfdeb3
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 11:16:57 2025 +0930
+
+    "modify TRACE check"
+
+commit 8dc7dfc60a055727b19ed97d7a279e648214bdec
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sun Apr 20 10:46:42 2025 +0930
+
+    "modify TRACE check"
+
+commit 8d1c62b16bea72e9b25fb885e4239f1806d49c2a
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 12:37:46 2025 +0930
+
+    "modify TRACE check"
+
+commit 1df6b0c211a1c1b08370b4c0cb841da640be5fc2
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 12:31:39 2025 +0930
+
+    "modify TRACE message"
+
+commit 115a07ae64d0d1189b8b3eba4761ea6ded002c04
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 11:25:08 2025 +0930
+
+    "test 3.2: failed: update TRACE"
+
+commit f8c5d9cbec27a223fad49701bce0e0d59f449928
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 11:22:20 2025 +0930
+
+    "test 3.1: TRACE check"
+
+commit 60336139068165db2264823ab259c4913f2599e3
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 11:20:22 2025 +0930
+
+    "test 3 failed: update syntax error and check whether  sequence number still within window"
+
+commit ef05e84c6ff99fac3036959555db80118ef1a820
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 11:06:55 2025 +0930
+
+    "test 2 failed: initialised  receiver buffer"
+
+commit 40ed822eb4b68b46b29153f043cc62a497c97501
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 11:03:57 2025 +0930
+
+    "test 1 failed: need to update the sequence number on receiver"
+
+commit b9b477f890034a25ee14ecf3ceaa8a5f40f3b817
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 10:53:53 2025 +0930
+
+    "implement SR logic in B_input: first check if packet is within window, then update seq number, else timeout and resend packet"
+
+commit 2bb977a8188f9ef8eeb57ea3217c0d011e6f1d7f
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Fri Apr 18 09:51:23 2025 +0930
+
+    "modify receiver behaviours: add receiver buffer to store packet received and create ACK packet to send back to sender"
+
+commit b70cc54593b017dfa54cbaf9bb4dfe21ac4dc4e9
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Apr 17 17:43:58 2025 +0930
+
+    "implement SR timer logic in A_timerinterrupt"
+
+commit abc6fe955b887c68dc062a1344c63f1ebcbc62ad
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Apr 17 16:52:40 2025 +0930
+
+    "implement SR logic in A_input"
+
+commit d20695d2634fa910e80da7592298d63bd776872f
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Apr 17 10:52:46 2025 +0930
+
+    "modify path for sr file compilation"
+
+commit 9369c782f523c20a64b7f4ead2e964f1a9e4f272
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Apr 17 10:50:53 2025 +0930
+
+    "create sr files"
+
+commit 3865232c6e4ec68e1d1a96664fd1154b69d87606
+Author: BAOJING LI <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Apr 17 10:04:41 2025 +0930
+
+    Create README.md
+
+commit 6f7e9e908c74f7426b3613a7fd139bbd170ab3a3
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Mar 27 12:12:25 2025 +1030
+
+    "log all changes"
+
+commit 95647c667563df3776bc4e0f702f07d52c6b5f0d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Thu Mar 27 12:10:21 2025 +1030
+
+    "test 16: debuggued, passed curl and telnet test"
+
+commit eb0aeaf955edeb63f6b1c04a923c3d8b438fe490
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 14:34:47 2025 +1030
+
+    "test 16 success: fetching resource from server"
+
+commit e8b188a349d725a15634752785827807e214549b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 13:39:53 2025 +1030
+
+    "test 15 success: parse the datetime based on RFC 2616 standard"
+
+commit 159fd12c7b6daf5fa1d7f98713628867792a7683
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 13:22:51 2025 +1030
+
+    "library update"
+
+commit 4c0f6449eff7ee1cfc7ac820d50d9863dd885e95
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 13:12:37 2025 +1030
+
+    "cache validity error fixing"
+
+commit 2f4c4395e39d1007d90f4e0f029161bfcff258eb
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 12:36:06 2025 +1030
+
+    "handle when status code is 301, 302 or 404, add error message"
+
+commit 0a8dbe5ae890c94c076b84b838bb061bc6e8d081
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 26 08:59:40 2025 +1030
+
+    "added lecture material directory"
+
+commit 97979070e7f3f26418394285c523137833d9a391
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:54:51 2025 +1030
+
+    "test 14 failed: could not connect to Proxy"
+
+commit 33a1c0a8d03520721e44be581a7e370644424d02
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:45:43 2025 +1030
+
+    "test 12: debugging variables"
+
+commit 65029a0e74da76880546430875142a0e80b6ac34
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:38:43 2025 +1030
+
+    "test 11 failed: localhost not responding"
+
+commit 82d5f4201c546944f4bf1d2c28f8f6bf86b8525d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:31:02 2025 +1030
+
+    "define the proxyhost"
+
+commit cc9587d6f789798cda20fc88d44b008add194d22
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:27:52 2025 +1030
+
+    "add defined variables for proxyHost and proxyServer"
+
+commit 1cfe2b7db81f8c76e4820b9409d58cdf19eae42d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:23:22 2025 +1030
+
+    "update port number to proxyPort"
+
+commit fe5c1b5111b36f5ce42a689132e0620182dd2480
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:20:54 2025 +1030
+
+    "delete lecture folder"
+
+commit 863ac977795aae466d95465185e9520daee8edb4
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:18:54 2025 +1030
+
+    "syntax update"
+
+commit 2487da19b1c59b89b6e6a6ce7ab2fe8733c84f3b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:15:24 2025 +1030
+
+    "variables update"
+
+commit 520924288b2210702385b54c29ff5ae53a0e3205
+Author: BAOJING LI <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:06:05 2025 +1030
+
+    Delete http.badssl.com directory
+
+commit f678e1fb560e67d6bb069141b07b153dcab84bd3
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 23:00:03 2025 +1030
+
+    "test 10.1 success: correctly handled proxy server and proxy server but failed to handle 301, 302, 404"
+
+commit 5a914d11bc29ba53eb04f8329cf6b491d365b557
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 22:33:54 2025 +1030
+
+    "test 10 success: keep the connection open after sending request"
+
+commit 290b2f92e277c7e87dd039a4fc3da7a80625b82d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 22:21:14 2025 +1030
+
+    "syntax update"
+
+commit b2958d0d47de33b308c183f1cad7362a6461d77a
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 22:18:43 2025 +1030
+
+    "modified syntax error"
+
+commit 1753a2cdafef491b9d5613fece11e5213d0c5af0
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 22:17:33 2025 +1030
+
+    "test 9.6 failed: tried to test with telnet and connection not established"
+
+commit b0c6a95c53b137cf905014e123175ddd49495fd6
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 21:59:37 2025 +1030
+
+    "compare with skeleton code and minor fix for the originServerSocket send request"
+
+commit eaad961536d6ccc018c6082d8ef7c02cf118f5e5
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:52:09 2025 +1030
+
+    "test 9.5 success: modify original server request"
+
+commit 2d05e8c8470f28636a000b2963662be743e93487
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:33:37 2025 +1030
+
+    "test 9.4 failed: update port number"
+
+commit f803ab32fe0bdffaa1450c50522d190c18717e51
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:27:59 2025 +1030
+
+    "test 9.3 failed: change proxyport to standard http port"
+
+commit f3fac29f9bb870492f58f2b6725a8e8efd317661
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:18:58 2025 +1030
+
+    "test 9.2 failed: could not connect to proxy server, replaced serversocket host to empty string"
+
+commit 1a978fac14c2f65bcfb648317e5cdd8c655977c8
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:13:00 2025 +1030
+
+    "test 9.1: update proxyPort number
+    "
+
+commit 2c4eaa7c65dc0765761a7e723e60edd1a9efcb78
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 17:03:29 2025 +1030
+
+    "test 9 success: update argument parameters"
+
+commit a93aad68283eded68ef299c185b2a7c2ba124626
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 16:54:02 2025 +1030
+
+    "test 8 success: update port number to 8080"
+
+commit ef46c5857f6070bc05dbdc3481cf032e0b9cb0d0
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 14:51:34 2025 +1030
+
+    "test 7 success: connect to proxy server and obtain same result from original server"
+
+commit 29f056eb41e963f26d919a4c937925302c0c1bc7
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 14:47:48 2025 +1030
+
+    "test 6 success: receive message  without decoding"
+
+commit c247e16d39e904bd914c85a2344890248917afde
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 12:16:38 2025 +1030
+
+    "test 5: success. reformatting the request line to reduce one new line"
+
+commit feaad8f37321958676227b51f51ce041ae25ef15
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 12:05:51 2025 +1030
+
+    "test 4 success: response received from original server change to buffer size"
+
+commit a14d54156871098d0498785ba4a244d64b144fbf
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 10:57:19 2025 +1030
+
+    "format cacheData into a single string before printing"
+
+commit 68b27cae3135ecfa7a257b09e8609ec5dc708654
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 10:46:31 2025 +1030
+
+    "test 3 failed: write the entire response to the cache file instead of iterating over items"
+
+commit f9bb7d0429b081eb0ebf4e827a54e2db198fadb8
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 10:37:28 2025 +1030
+
+    "implement main function"
+
+commit cafabe1770a6ae518495447f3f1cb894cdecf854
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 10:24:34 2025 +1030
+
+    "update the number of incoming connections and the message bytes when client socket receiving"
+
+commit 5b1dc48e34d78f1372087828b1dc060115b34b1f
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 10:08:06 2025 +1030
+
+    "test 2 failed: try to fix proxy connection issue, change connection socket to client socket to send and receive data"
+
+commit 35071e1977cc9d9cdc88f9a4136d7c88bfff5b35
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 09:46:33 2025 +1030
+
+    "update URL redirection when status code is 301 or 302"
+
+commit c9755bf9244275140d05bce38897b4502f455c0b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Tue Mar 25 00:04:08 2025 +1030
+
+    "server binding change to a tuple instead of two parameters"
+
+commit ae04a84c3f41e8895d9e32e8281f4a289176f4ff
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Mon Mar 24 23:52:28 2025 +1030
+
+    "change server binding function"
+
+commit 584e465e34714760f6bd96ab45325b53532bee81
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Mon Mar 24 23:44:45 2025 +1030
+
+    "test 1 failed: passes two separate arguments instead of a tuple when binding server"
+
+commit 86650b1b0f9afbc9d9e298ead15d0a07298c9285
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Mon Mar 24 23:33:39 2025 +1030
+
+    decide whether cache content should be wiped out and fetch to the original server or can be sent to client if still valid based on RFC 2616
+
+commit f3243b7731302cb4c2113c513e9be30e446bad2b
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Mon Mar 24 21:44:49 2025 +1030
+
+    "followed the tcpserver code to bind the socket to server and listen on the server socket
+
+commit 903dfaf0b38475ae44eaf6729a6be4d261ac0d70
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Sat Mar 22 20:56:56 2025 +1030
+
+    "create a server socket"
+
+commit 4525d73213728a848b3dfb5ae4c87bcd85f7b09d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 12:08:18 2025 +1030
+
+    'folder update'
+
+commit 77d61a1183096710e3bee4a5b2c87dab253a49de
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 12:04:26 2025 +1030
+
+    'add proxy file"
+
+commit daa5f26964c31a6223ecd366844092bbc70bf95d
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 12:03:58 2025 +1030
+
+    "delete created file"
+
+commit f21dd7b97984f7bf2ca4e82dad6f47d2d35c296f
+Author: EliasLAlexander <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 11:49:38 2025 +1030
+
+    "create proxy file"
+
+commit 052d393eaa6325677933f44ab9f81e1d03f94398
+Author: BAOJING LI <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 11:38:25 2025 +1030
+
+    Add lecture materials
+
+commit 564013f991389ce7564c9338d5082d2c066eec60
+Author: BAOJING LI <141297430+EliasLAlexander@users.noreply.github.com>
+Date:   Wed Mar 19 11:37:40 2025 +1030
+
+    Create Lecture folder
