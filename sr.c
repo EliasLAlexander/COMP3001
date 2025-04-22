@@ -113,7 +113,7 @@ void A_output(struct msg message)
 void A_input(struct pkt packet)
 {
   /* int ackcount = 0; */   /* not resetting because of windows sliding */
-  /* int i */
+  int i;
 
   /* if received ACK is not corrupted */ 
   if (!IsCorrupted(packet)) {
@@ -144,17 +144,18 @@ void A_input(struct pkt packet)
             windowcount --;
 
 	          /* slide window by the number of packets ACKed */
-
-            while (windowcount > 0 && buffer[windowfirst].acknum == 0) {
-              windowfirst = (windowfirst + 1) % WINDOWSIZE;
-              ackcount--;
+            if (buffer[windowfirst].seqnum == packet.acknum) {
+              for (i=0; i<WINDOWSIZE; i++) {
+                if (buffer[windowfirst].acknum == 0){
+                  windowfirst = (windowfirst + 1) % WINDOWSIZE;
+                  ackcount--;
+                }
+              }  
             }
-
 	    /* start timer again if there are still more unacked packets in window */
             stoptimer(A);
             if (windowcount > 0)
               starttimer(A, RTT);
-
           }
         }
         else
