@@ -265,7 +265,7 @@ void B_input(struct pkt packet)
   }
     
     if (in_window) {
-      // store the packet in the receiver buffer at the appropriate position
+      /* store the packet in the receiver buffer at the appropriate position */
       receiver_buffer[packet.seqnum % WINDOWSIZE] = packet;
 
       /* deliver to receiving application */
