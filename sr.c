@@ -253,7 +253,7 @@ void B_input(struct pkt packet)
     tolayer3 (B, ackpkt); /* send ACK packet to layer 3 */
     packets_received++; /* increase the number of packets sent */
     
-    /*check if the packet is still within the window*/
+    /* check if the packet is still within the window */
     if (expectedseqnum <= window_end) {
       /* sequence numbers in current range */
       in_window = (packet.seqnum >= expectedseqnum && packet.seqnum <= window_end);
@@ -267,7 +267,7 @@ void B_input(struct pkt packet)
       /* tolayer5(B, packet.payload); */ 
 
       for (i = 0; i < WINDOWSIZE; i++) {
-        if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
+        if (receiver_buffer[receiver_windowfirst].seqnum != expectedseqnum)
           break;
       
         tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
