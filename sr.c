@@ -272,10 +272,10 @@ void B_input(struct pkt packet)
       /* tolayer5(B, packet.payload); */ 
 
       for (i = 0; i < WINDOWSIZE; i++) {
-        if (receiver_buffer[receiver_windowfirst].seqnum != expectedseqnum)
+        if (receiver_buffer[expectedseqnum % WINDOWSIZE].seqnum != expectedseqnum)
           break;
       
-        tolayer5(B, receiver_buffer[receiver_windowfirst].payload);
+        tolayer5(B, receiver_buffer[expectedseqnum % WINDOWSIZE].payload);
         receiver_windowfirst = (receiver_windowfirst + 1) % WINDOWSIZE;
         expectedseqnum = (expectedseqnum + 1) % SEQSPACE;
       }      
